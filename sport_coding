@@ -1,0 +1,23 @@
+cdir(){
+    j master
+    if [ ! -d "$@" ]; then
+        mkdir "$@"
+    fi
+    cd "$@"
+}
+
+supercompile(){
+    g++ -g -std=c++17 -O2 -Wall -Wextra -pedantic -Wshadow -Wformat=2 -Wfloat-equal -Wconversion -Wlogical-op -Wshift-overflow=2 -Wduplicated-cond -Wcast-qual -Wcast-align -Wno-unused-result -Wno-sign-conversion -fsanitize=address -fsanitize=undefined -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize-recover=all -fstack-protector-all -D_FORTIFY_SOURCE=2 -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -DDEBUG -DKILL_BUG "${PWD}/`basename $PWD`.cpp" -o `basename $PWD`
+}
+
+push(){
+    git add .
+    git add ./*
+    git commit --allow-empty-message -m "$@"
+    git push
+}
+
+te(){
+    x=$(basename $PWD)
+    cp "${x}-t.cpp" "${x}.cpp"
+}
