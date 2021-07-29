@@ -20,4 +20,5 @@ push(){
 te(){
     x=$(basename $PWD)
     cp "${x}-t.cpp" "${x}.cpp"
+    nvim ${x}.cpp
 }
